@@ -92,7 +92,7 @@ def get_weather_data(city_name):
                         pop = pop_time['parameter']['parameterName'] + "%"
                         break
 
-            display_text = f"{city_name} {start_dt.month}/{start_dt.day} {time_desc}是：**{desc}**，降雨機率**{pop}**喔！"
+            display_text = f"{city_name} {start_dt.month}/{start_dt.day} {time_desc}是：**{desc}**，降雨機率 {pop} 喔！"
             return desc, display_text
         return None, "無法取得天氣資料：資料結構異常或該縣市無預報資料。"
     except requests.exceptions.RequestException as e:
@@ -177,9 +177,9 @@ def find_and_recommend_music(weather_desc, all_videos):
     if best_match and best_score > 70:
         youtube_id = extract_youtube_id(best_match['url'])
         if youtube_id:
-            return f"為您推薦與「{weather_desc}」相關的音樂：\n**{best_match['desc']}**", youtube_id
+            return f"這天氣來首以下音樂吧！", youtube_id
         else:
-            return f"為您推薦與「{weather_desc}」相關的音樂：\n**[{best_match['desc']}]({best_match['url']})** (無法播放，請點擊連結)", None # 如果無法提取ID，提供連結
+            return f"這天氣來首以下音樂吧！(請點擊連結)", None # 如果無法提取ID，提供連結
     else:
         return f"找不到與 '{weather_desc}' 相關的音樂，請嘗試隨機推薦。", None
 
@@ -190,9 +190,9 @@ def random_music_recommendation(all_videos):
     video = random.choice(all_videos)
     youtube_id = extract_youtube_id(video['url'])
     if youtube_id:
-        return f"已為您隨機推薦了一首音樂：\n**{video['desc']}**", youtube_id
+        return f"已為您隨機推薦以下歌曲：, youtube_id
     else:
-        return f"已為您隨機推薦了一首音樂：\n**[{video['desc']}]({video['url']})** (無法播放，請點擊連結)", None
+        return f"已為您隨機推薦以下歌曲：(請點擊連結)", None
 
 def random_movie_recommendation(movie_poster_urls):
     """隨機推薦一部電影海報。"""
